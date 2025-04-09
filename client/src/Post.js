@@ -1,17 +1,25 @@
-export default function Post(){
+import {formatISO9075} from 'date-fns';
+import { Link } from 'react-router';
+
+export default function Post({_id, title, summary, cover, content, createdAt, author}) {
+    
     return (
         <div className="post">
-        <div className="image">
-        <img src="https://media.gettyimages.com/id/1532463489/photo/the-hive-nanyang-technological-university.jpg?s=612x612&w=0&k=20&c=uInFG3Ox08AdkaQNd1pRBCnfzoKbm9Yen_0f2w5QdVE=" alt="" />
-        </div>
-        <div className="texts">
-        <h2>NTU Hive</h2>
-        <p className="info">
-            <a href="" className="author">Li Yikai</a>
-            <time>2025.3.31</time>
-        </p>
-        <p className="summary">Hive is very beautiful</p>
-        </div>
+            <div className="image">
+                <Link to={`/post/${_id}`}>
+                    <img src={'http://localhost:4000/' + cover} alt="" />
+                </Link>
+            </div>
+            <div className="texts">
+                <Link to={`/post/${_id}`}>
+                    <h2>{title}</h2>
+                </Link>
+                <p className="info">
+                    <a className="author">{author.username}</a>
+                    <time>{formatISO9075(new Date(createdAt))}</time>
+                </p>
+                <p className="summary">{summary}</p>
+            </div>
         </div>
     );
 }
